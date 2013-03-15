@@ -169,6 +169,18 @@ module.exports = function(grunt) {
           port: 8888
         }
       }
+    },
+
+    testacular: {
+      unit: {
+        options: {
+          configFile: 'testacular.conf.js',
+          runnerPort: 9101,
+          keepalive: true,
+          browsers: ['Chrome', 'PhantomJS', 'Firefox', 'Safari'],
+          autoWatch: true
+        }
+      }
     }
   });
 
@@ -180,8 +192,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-plato');
+  grunt.loadNpmTasks('grunt-testacular');
 
   grunt.registerTask('test', ['jshint', 'jasmine:marionette']);
+  grunt.registerTask('testacular-dev', ['jshint', 'testacular']);
 
   grunt.registerTask('dev', ['test', 'watch:marionette']);
 
